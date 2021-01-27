@@ -11,13 +11,13 @@ variables:
   #azureServiceConnectionId:
   
   # Web app name
-  # webAppName:
+  # qaWebAppName:
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
   # Environment name
-  environmentName: 'junctionstation-devops-1'
+  #qaEnvironmentName:
 
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
@@ -60,15 +60,15 @@ stages:
       displayName: 'Upload package'
       artifact: drop
 
-- stage: Deploy
-  displayName: 'Deploy Web App'
+- stage: QADeploy
+  displayName: 'Deploy Web App for QA'
   dependsOn: Build
   condition: succeeded()
   jobs:
-  - deployment: DeploymentJob
+  - deployment: DeploymentJobQA
     pool:
       vmImage: $(vmImageName)
-    environment: $(environmentName)
+    environment: $(aqEnvironmentName)
     strategy:
       runOnce:
         deploy:
@@ -80,8 +80,8 @@ stages:
             displayName: 'Use Python version'
 
           - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App : junctionstation-devops-1'
+            displayName: 'Deploy Azure Web App for QA'
             inputs:
               azureSubscription: $(azureServiceConnectionId)
-              appName: $(webAppName)
+              appName: $(qaWebAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
