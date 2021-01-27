@@ -65,15 +65,14 @@ stages:
   dependsOn: Build
   condition: succeeded()
   jobs:
-  - deployment: DeploymentJobQA
+  - deployment: DeploymentJob
     pool:
       vmImage: $(vmImageName)
-    environment: $(aqEnvironmentName)
+    environment: $(qaEnvironmentName)
     strategy:
       runOnce:
         deploy:
           steps:
-          
           - task: UsePythonVersion@0
             inputs:
               versionSpec: '$(pythonVersion)'
@@ -84,4 +83,29 @@ stages:
             inputs:
               azureSubscription: $(azureServiceConnectionId)
               appName: $(qaWebAppName)
+              package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+
+- stage: ProductionDeploy
+  displayName: 'Deploy Web App for Production'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: DeploymentJob
+    pool:
+      vmImage: $(vmImageName)
+    environment: $(productionEnvironmentName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '$(pythonVersion)'
+            displayName: 'Use Python version'
+
+          - task: AzureWebApp@1
+            displayName: 'Deploy Azure Web App for Production'
+            inputs:
+              azureSubscription: $(azureServiceConnectionId)
+              appName: $(productionWebAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
