@@ -26,7 +26,7 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
   
   qaTagPrefix: 'refs/tags/qa'
-  productionPrefix: 'refs/tags/release'
+  productionTagPrefix: 'refs/tags/release'
 
   # Python version: 3.7
   pythonVersion: '3.7'
@@ -69,7 +69,12 @@ stages:
 - stage: QADeploy
   displayName: 'Deploy Web App for QA'
   dependsOn: Build
-  condition: succeeded()
+  condition: |
+    and
+    (
+      succeeded(),
+      startsWith(variables['Build.SourceBranch'], variables['qaTagPrefix'])
+    )
   jobs:
   - deployment: DeploymentJob
     pool:
@@ -98,7 +103,7 @@ stages:
     and
     (
       succeeded(),
-      startsWith(variables['Build.SourceBranchName'], variables['releaseTagPrefix'])
+      startsWith(variables['Build.SourceBranch'], variables['productionTagPrefix'])
     )
   jobs:
   - deployment: DeploymentJob
