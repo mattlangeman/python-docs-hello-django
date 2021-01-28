@@ -4,7 +4,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-- main
+  tags:
+    include:
+    - 'qa*'
+    - 'release*'
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
@@ -22,6 +25,9 @@ variables:
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
   
+  qaTagPrefix: 'refs/tags/qa'
+  productionPrefix: 'refs/tags/release'
+
   # Python version: 3.7
   pythonVersion: '3.7'
 
@@ -88,7 +94,12 @@ stages:
 - stage: ProductionDeploy
   displayName: 'Deploy Web App for Production'
   dependsOn: Build
-  condition: succeeded()
+  condition: |
+    and
+    (
+      succeeded(),
+      startsWith(variables['Build.SourceBranchName'], variables['releaseTagPrefix'])
+    )
   jobs:
   - deployment: DeploymentJob
     pool:
