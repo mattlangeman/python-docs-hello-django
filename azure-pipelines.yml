@@ -99,7 +99,7 @@ stages:
             displayName: Azure App Service Settings
             inputs:
               azureSubscription: $(azureServiceConnectionId)
-              appName: $(qaWebApp_Name)
+              appName: $(qaWebAppName)
             # To deploy the settings on a slot, provide slot name as below. By default, the settings would be applied to the actual Web App (Production slot)
             # slotName: staging
               appSettings: |
