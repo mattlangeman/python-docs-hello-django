@@ -98,7 +98,7 @@ stages:
           - task: AzureAppServiceSettings@1
             displayName: Azure App Service Settings
             inputs:
-              azureSubscription: $(azureSubscription)
+              azureSubscription: $(azureServiceConnectionId)
               appName: $(WebApp_Name)
             # To deploy the settings on a slot, provide slot name as below. By default, the settings would be applied to the actual Web App (Production slot)
             # slotName: staging
