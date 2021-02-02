@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.conf import settings
 
 def hello(request):
-    return HttpResponse("Hello, World! Welcome to the web. Tagged release-0.1.1")
+    return HttpResponse("Hello, World! %s" % (settings.DJANGO_GETS_ENV))
