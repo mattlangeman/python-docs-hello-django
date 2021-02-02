@@ -95,6 +95,21 @@ stages:
               azureSubscription: $(azureServiceConnectionId)
               appName: $(qaWebAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+          - task: AzureAppServiceSettings@1
+            displayName: Azure App Service Settings
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: $(WebApp_Name)
+            # To deploy the settings on a slot, provide slot name as below. By default, the settings would be applied to the actual Web App (Production slot)
+            # slotName: staging
+              appSettings: |
+                [
+                  {
+                    "name": "DJANGO_OTHER_ENV_VAR",
+                    "value": "set env in yaml",
+                    "slotSetting": false
+                  }
+                ]
 
 - stage: ProductionDeploy
   displayName: 'Deploy Web App for Production'
