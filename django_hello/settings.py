@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'hello'
 ]
 
@@ -119,7 +120,26 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 
-STATIC_URL = '/static/'
+DEFAULT_FILE_STORAGE = 'django_hello.backend.AzureMediaStorage'
+STATICFILES_STORAGE  = 'django_hello.backend.AzureStaticStorage'
+
+AZURE_ACCOUNT_NAME = config('AZURE_ACCOUNT_NAME')
+AZURE_STORAGE_KEY = config('AZURE_STORAGE_KEY')
+AZURE_CONTAINER = config('AZURE_CONTAINER')
+
+AZURE_MEDIA_CONTAINER = config('AZURE_MEDIA_CONTAINER', 'media')
+AZURE_STATIC_CONTAINER = config('AZURE_STATIC_CONTAINER', 'static')
+
+AZURE_STORAGE_DOMAIN = 'jstationdevopstesting.blob.core.windows.net'
+
+STATIC_URL = f'https://{AZURE_STORAGE_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
+MEDIA_URL = f'https://{AZURE_STORAGE_DOMAIN}/{AZURE_MEDIA_CONTAINER}/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]

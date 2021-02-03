@@ -1,3 +1,4 @@
 Django>=3.0,<=3.1
+django-storages[azure]==1.11.1
 psycopg2-binary
 python-decouple>=3.4,<3.5
