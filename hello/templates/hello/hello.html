@@ -2,9 +2,10 @@
 <!doctype html>
 <html>
 <head>
-<title>Web App Template</title>
-<meta name="description" content="A webpage">
-<meta name="keywords" content="html template">
+    <title>Web App Template</title>
+    <meta name="description" content="A webpage">
+    <meta name="keywords" content="html template">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
 <h1>Hello World</h1>
@@ -14,14 +15,14 @@
     <li>DJANGO_OTHER_ENV_VAR: {{ DJANGO_OTHER_ENV_VAR }}</li> 
 </ul>
 
-<div>
+<div class="container">
     <h2>Private Upload</h2>
     <img width="400px" src="{{ file_upload.private_upload.url }}" />
     <p>This file has a signed url that expires</p>
     <p>{{ file_upload.private_upload.url }}"</p>
 </div>
 
-<div>
+<div class="container">
     <h2>Public Upload</h2>
     <img width="400px" src="{{ file_upload.public_upload.url }}" />
     <p>This file has a public url that is always accessible</p>

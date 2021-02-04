@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='FileUpload',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('upload', models.FileField(upload_to=hello.models.user_directory_path)),
+                ('upload', models.FileField()),
             ],
         ),
     ]
