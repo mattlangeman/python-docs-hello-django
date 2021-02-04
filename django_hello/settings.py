@@ -120,11 +120,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-
-DEFAULT_FILE_STORAGE = 'django_hello.backend.AzureMediaStorage'
-STATICFILES_STORAGE  = 'django_hello.backend.AzureStaticStorage'
+DEFAULT_FILE_STORAGE = 'django_hello.backend.AzurePrivateStorage'
+STATICFILES_STORAGE  = 'django_hello.backend.AzurePublicStorage'
 
 AZURE_ACCOUNT_NAME = config('AZURE_ACCOUNT_NAME')
 AZURE_STORAGE_KEY = config('AZURE_STORAGE_KEY')

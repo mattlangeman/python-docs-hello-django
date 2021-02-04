@@ -14,7 +14,19 @@
     <li>DJANGO_OTHER_ENV_VAR: {{ DJANGO_OTHER_ENV_VAR }}</li> 
 </ul>
 
-<img src="{{ file_upload.upload.url }}" />
+<div>
+    <h2>Private Upload</h2>
+    <img width="400px" src="{{ file_upload.private_upload.url }}" />
+    <p>This file has a signed url that expires</p>
+    <p>{{ file_upload.private_upload.url }}"</p>
+</div>
+
+<div>
+    <h2>Public Upload</h2>
+    <img width="400px" src="{{ file_upload.public_upload.url }}" />
+    <p>This file has a public url that is always accessible</p>
+    <p>{{ file_upload.public_upload.url }}</p>
+</div>
 
 </body>
 </html>

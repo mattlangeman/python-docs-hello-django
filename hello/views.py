@@ -12,6 +12,7 @@ def hello(request):
         'DJANGO_GETS_ENV': settings.DJANGO_GETS_ENV,
         'DJANGO_OTHER_ENV_VAR': settings.DJANGO_OTHER_ENV_VAR,
         'file_upload': file_upload
+
     }
     response = TemplateResponse(request, 'hello/hello.html', context)
     return response
