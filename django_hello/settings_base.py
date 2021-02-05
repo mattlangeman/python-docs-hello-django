@@ -109,10 +109,14 @@ USE_TZ = True
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 STORAGE_METHOD = config('STORAGE_METHOD', 'local')  # local or azure
 
@@ -130,3 +134,5 @@ if STORAGE_METHOD == 'azure':
 
     STATIC_URL = f'https://{AZURE_STORAGE_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
     MEDIA_URL = f'https://{AZURE_STORAGE_DOMAIN}/{AZURE_MEDIA_CONTAINER}/'
+
+    MEDIA_ROOT = ''
