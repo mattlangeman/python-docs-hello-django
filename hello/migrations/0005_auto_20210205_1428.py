@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='fileupload',
             name='public_upload',
-            field=models.FileField(blank=True, null=True, storage=django_hello.backend.AzurePublicStorage(), upload_to=''),
+            field=models.FileField(blank=True, null=True, storage=django_hello.backend.PublicStorage(), upload_to=''),
         ),
     ]

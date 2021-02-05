@@ -10,11 +10,6 @@
 <body>
 <h1>Hello World</h1>
 
-<ul>
-    <li>DJANGO_GETS_ENV: {{ DJANGO_GETS_ENV }}</li>
-    <li>DJANGO_OTHER_ENV_VAR: {{ DJANGO_OTHER_ENV_VAR }}</li> 
-</ul>
-
 <div class="container">
     <h2>Private Upload</h2>
     <img width="400px" src="{{ file_upload.private_upload.url }}" />

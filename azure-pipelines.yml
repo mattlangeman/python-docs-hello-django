@@ -108,6 +108,11 @@ stages:
                     "name": "DJANGO_OTHER_ENV_VAR",
                     "value": "set env in yaml",
                     "slotSetting": false
+                  },
+                  {
+                    "name": "DEPLOY_MODE",
+                    "value": "production",
+                    "slotSetting": false
                   }
                 ]
 
