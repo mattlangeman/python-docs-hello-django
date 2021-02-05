@@ -1,0 +1,6 @@
+/* Styles for the site */
+
+.container {
+    border: 1px solid gray;
+    padding: 2rem;
+}
