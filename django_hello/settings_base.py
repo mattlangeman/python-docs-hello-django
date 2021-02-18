@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
-    'hello'
+    'hello',
+    #'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -130,9 +131,12 @@ if STORAGE_METHOD == 'azure':
     AZURE_MEDIA_CONTAINER = config('AZURE_MEDIA_CONTAINER', 'media')
     AZURE_STATIC_CONTAINER = config('AZURE_STATIC_CONTAINER', 'static')
 
-    AZURE_STORAGE_DOMAIN = 'jstationdevopstesting.blob.core.windows.net'
+    #AZURE_STORAGE_DOMAIN = 'jstationdevopstesting.blob.core.windows.net'
+    AZURE_CUSTOM_DOMAIN = 'devopstesting.azureedge.net'
 
-    STATIC_URL = f'https://{AZURE_STORAGE_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
-    MEDIA_URL = f'https://{AZURE_STORAGE_DOMAIN}/{AZURE_MEDIA_CONTAINER}/'
+    AZURE_CACHE_CONTROL = 'public,max-age=120,immutable'
+
+    STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
+    MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_MEDIA_CONTAINER}/'
 
     MEDIA_ROOT = ''
